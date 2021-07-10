@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="practicaVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Detail">
+    <Key>
+      <PropertyRef Name="IdEmpleado" />
+    </Key>
+    <Property Name="IdEmpleado" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoIdentificacion" Type="varchar" MaxLength="1" />
+    <Property Name="Identificacion" Type="varchar" MaxLength="20" />
+    <Property Name="Salario" Type="decimal" Precision="14" Scale="2" />
+    <Property Name="Moneda" Type="varchar" MaxLength="3" />
+    <Property Name="IdHeader" Type="int" />
+  </EntityType>
+  <EntityType Name="Header">
+    <Key>
+      <PropertyRef Name="IdHeader" />
+    </Key>
+    <Property Name="IdHeader" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Proceso" Type="varchar" MaxLength="2" />
+    <Property Name="RNC" Type="int" />
+    <Property Name="PeriodoAutodeterminacion" Type="date" />
+    <Property Name="FechaTransmision" Type="date" />
+  </EntityType>
+  <Association Name="FK__Detail__IdHeader__3D5E1FD2">
+    <End Role="Header" Type="Self.Header" Multiplicity="0..1" />
+    <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Header">
+        <PropertyRef Name="IdHeader" />
+      </Principal>
+      <Dependent Role="Detail">
+        <PropertyRef Name="IdHeader" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="practicaVModelStoreContainer">
+    <EntitySet Name="Detail" EntityType="Self.Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Header" EntityType="Self.Header" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Detail__IdHeader__3D5E1FD2" Association="Self.FK__Detail__IdHeader__3D5E1FD2">
+      <End Role="Header" EntitySet="Header" />
+      <End Role="Detail" EntitySet="Detail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

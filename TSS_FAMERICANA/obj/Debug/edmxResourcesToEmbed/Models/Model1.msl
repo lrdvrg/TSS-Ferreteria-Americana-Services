@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="practicaVModelStoreContainer" CdmEntityContainer="practicaVEntities">
+    <EntitySetMapping Name="Detail">
+      <EntityTypeMapping TypeName="practicaVModel.Detail">
+        <MappingFragment StoreEntitySet="Detail">
+          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+          <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="Salario" ColumnName="Salario" />
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+          <ScalarProperty Name="IdHeader" ColumnName="IdHeader" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Header">
+      <EntityTypeMapping TypeName="practicaVModel.Header">
+        <MappingFragment StoreEntitySet="Header">
+          <ScalarProperty Name="IdHeader" ColumnName="IdHeader" />
+          <ScalarProperty Name="Proceso" ColumnName="Proceso" />
+          <ScalarProperty Name="RNC" ColumnName="RNC" />
+          <ScalarProperty Name="PeriodoAutodeterminacion" ColumnName="PeriodoAutodeterminacion" />
+          <ScalarProperty Name="FechaTransmision" ColumnName="FechaTransmision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

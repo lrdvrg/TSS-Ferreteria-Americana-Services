@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="practicaVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Detail">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoIdentificacion" Type="varchar" MaxLength="1" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="20" />
+          <Property Name="Salario" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="Moneda" Type="varchar" MaxLength="3" />
+          <Property Name="IdHeader" Type="int" />
+        </EntityType>
+        <EntityType Name="Header">
+          <Key>
+            <PropertyRef Name="IdHeader" />
+          </Key>
+          <Property Name="IdHeader" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Proceso" Type="varchar" MaxLength="2" />
+          <Property Name="RNC" Type="int" />
+          <Property Name="PeriodoAutodeterminacion" Type="date" />
+          <Property Name="FechaTransmision" Type="date" />
+        </EntityType>
+        <Association Name="FK__Detail__IdHeader__3D5E1FD2">
+          <End Role="Header" Type="Self.Header" Multiplicity="0..1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Header">
+              <PropertyRef Name="IdHeader" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="IdHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="practicaVModelStoreContainer">
+          <EntitySet Name="Detail" EntityType="Self.Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Header" EntityType="Self.Header" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Detail__IdHeader__3D5E1FD2" Association="Self.FK__Detail__IdHeader__3D5E1FD2">
+            <End Role="Header" EntitySet="Header" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="practicaVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Detail">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoIdentificacion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Salario" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="Moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="IdHeader" Type="Int32" />
+          <NavigationProperty Name="Header" Relationship="Self.FK__Detail__IdHeader__38996AB5" FromRole="Detail" ToRole="Header" />
+        </EntityType>
+        <EntityType Name="Header">
+          <Key>
+            <PropertyRef Name="IdHeader" />
+          </Key>
+          <Property Name="IdHeader" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Proceso" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="RNC" Type="Int32" />
+          <Property Name="PeriodoAutodeterminacion" Type="DateTime" Precision="0" />
+          <Property Name="FechaTransmision" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Detail" Relationship="Self.FK__Detail__IdHeader__38996AB5" FromRole="Header" ToRole="Detail" />
+        </EntityType>
+        <Association Name="FK__Detail__IdHeader__38996AB5">
+          <End Role="Header" Type="Self.Header" Multiplicity="0..1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Header">
+              <PropertyRef Name="IdHeader" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="IdHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="practicaVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Detail" EntityType="Self.Detail" />
+          <EntitySet Name="Header" EntityType="Self.Header" />
+          <AssociationSet Name="FK__Detail__IdHeader__38996AB5" Association="Self.FK__Detail__IdHeader__38996AB5">
+            <End Role="Header" EntitySet="Header" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="practicaVModelStoreContainer" CdmEntityContainer="practicaVEntities">
+          <EntitySetMapping Name="Detail">
+            <EntityTypeMapping TypeName="practicaVModel.Detail">
+              <MappingFragment StoreEntitySet="Detail">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="IdHeader" ColumnName="IdHeader" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Header">
+            <EntityTypeMapping TypeName="practicaVModel.Header">
+              <MappingFragment StoreEntitySet="Header">
+                <ScalarProperty Name="IdHeader" ColumnName="IdHeader" />
+                <ScalarProperty Name="Proceso" ColumnName="Proceso" />
+                <ScalarProperty Name="RNC" ColumnName="RNC" />
+                <ScalarProperty Name="PeriodoAutodeterminacion" ColumnName="PeriodoAutodeterminacion" />
+                <ScalarProperty Name="FechaTransmision" ColumnName="FechaTransmision" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

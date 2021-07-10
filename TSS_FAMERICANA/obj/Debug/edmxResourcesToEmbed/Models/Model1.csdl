@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="practicaVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Detail">
+    <Key>
+      <PropertyRef Name="IdEmpleado" />
+    </Key>
+    <Property Name="IdEmpleado" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoIdentificacion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Salario" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="Moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="IdHeader" Type="Int32" />
+    <NavigationProperty Name="Header" Relationship="Self.FK__Detail__IdHeader__38996AB5" FromRole="Detail" ToRole="Header" />
+  </EntityType>
+  <EntityType Name="Header">
+    <Key>
+      <PropertyRef Name="IdHeader" />
+    </Key>
+    <Property Name="IdHeader" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Proceso" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="RNC" Type="Int32" />
+    <Property Name="PeriodoAutodeterminacion" Type="DateTime" Precision="0" />
+    <Property Name="FechaTransmision" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Detail" Relationship="Self.FK__Detail__IdHeader__38996AB5" FromRole="Header" ToRole="Detail" />
+  </EntityType>
+  <Association Name="FK__Detail__IdHeader__38996AB5">
+    <End Role="Header" Type="Self.Header" Multiplicity="0..1" />
+    <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Header">
+        <PropertyRef Name="IdHeader" />
+      </Principal>
+      <Dependent Role="Detail">
+        <PropertyRef Name="IdHeader" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="practicaVEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Detail" EntityType="Self.Detail" />
+    <EntitySet Name="Header" EntityType="Self.Header" />
+    <AssociationSet Name="FK__Detail__IdHeader__38996AB5" Association="Self.FK__Detail__IdHeader__38996AB5">
+      <End Role="Header" EntitySet="Header" />
+      <End Role="Detail" EntitySet="Detail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
